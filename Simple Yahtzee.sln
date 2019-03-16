@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple Yahtzee", "Simple Yahtzee\Simple Yahtzee.csproj", "{FDCB6218-8BEF-454F-8356-7051E03979EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDCB6218-8BEF-454F-8356-7051E03979EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDCB6218-8BEF-454F-8356-7051E03979EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDCB6218-8BEF-454F-8356-7051E03979EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDCB6218-8BEF-454F-8356-7051E03979EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD1E05FD-B212-43D2-B4F6-C61BF78544E2}
+	EndGlobalSection
+EndGlobal

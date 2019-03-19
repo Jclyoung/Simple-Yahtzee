@@ -17,7 +17,7 @@ namespace Simple_Yahtzee
         {
             Console.Clear();
             Console.WriteLine("Choose an Option:");
-            Console.WriteLine("p) Play Yahtzee");
+            Console.WriteLine("1) Play Yahtzee");
             Console.WriteLine("2) Instructions");
             Console.WriteLine("3) Quit");
             int userSelection = Console.Read());
@@ -43,21 +43,22 @@ namespace Simple_Yahtzee
             Console.WriteLine("The object of this game is to get a 2, 3, 4 or 5 of a kind." +
                 "/EEverytime you roll the dice you will be able to select which dice you would like to keep." +
                 "/YYou will get a total of 3 rolls.");
-            Console.WriteLine("Please choose one of the following:");
-            Console.WriteLine("\"p\" to play the game");
-            Console.WriteLine("\"m\" for the menu");
-            Console.WriteLine("\"q\" to quit.");
-            string userSelection = Console.ReadLine();
-            if (userSelection == "p")
+            Console.WriteLine("Choose an Option:");
+            Console.WriteLine("1) Play Yahtzee");
+            Console.WriteLine("2) Main Menu");
+            Console.WriteLine("3) Quit");
+            int userSelection = Console.Read());
+            if (userSelection == 1)
             {
                 Yahtzee();
+
             }
-            else if (userSelection == "m")
+            else if (userSelection == 2)
             {
                 MainMenu();
 
             }
-            else if (userSelection == "q")
+            else if (userSelection == 3)
                 return;
         }
        

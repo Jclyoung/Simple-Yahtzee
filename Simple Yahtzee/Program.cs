@@ -1,38 +1,105 @@
 ﻿using System;
 
+
 namespace Simple_Yahtzee
 {
     class Program
     {
         public static void Main(string[] args)
+        { //myarray.cacant.newarray.toarray
+            bool displayMenu = true;
+            while (displayMenu)
+            {
+                displayMenu = MainMenu();
+            }
+        }
+        public static bool MainMenu()
         {
+            Console.Clear();
+            Console.WriteLine("Choose an Option:");
+            Console.WriteLine("p) Play Yahtzee");
+            Console.WriteLine("2) Instructions");
+            Console.WriteLine("3) Quit");
+            int userSelection = Console.Read());
+            if (userSelection == 1 )
+            {
+                Yahtzee();
+                return true;
+            }
+            else if (userSelection == 2)
+            {
+                Instructions();
+                return true;
+            }
+            else if (userSelection == 3)
+                return false;
+            return true;
 
-            int keptDice = 0;            
+        }
+
+        public static void Instructions()
+        {   //break sentences to make it more asthetically pleasing
+
+            Console.WriteLine("The object of this game is to get a 2, 3, 4 or 5 of a kind." +
+                "/EEverytime you roll the dice you will be able to select which dice you would like to keep." +
+                "/YYou will get a total of 3 rolls.");
+            Console.WriteLine("Please choose one of the following:");
+            Console.WriteLine("\"p\" to play the game");
+            Console.WriteLine("\"m\" for the menu");
+            Console.WriteLine("\"q\" to quit.");
+            string userSelection = Console.ReadLine();
+            if (userSelection == "p")
+            {
+                Yahtzee();
+            }
+            else if (userSelection == "m")
+            {
+                MainMenu();
+
+            }
+            else if (userSelection == "q")
+                return;
+        }
+       
+        public static void Yahtzee()
+        {
+            Console.Clear();
+            int keptDice = 0;
+            int userSelection = 0;
             Console.WriteLine("Welcome to a basic game of Yahtzee dice.");
-            Console.WriteLine("The object of this game is to get a 2, 3, 4 or 5 of a kind. " +
-                "Everytime you roll the dice you will be able to select which dice you would like to keep." +
-                "You will get a total of 3 rolls.");
-            Console.WriteLine("Please push enter to begin.");
+            Console.WriteLine("Player One, please enter your name");
+            string playerOne = Console.ReadLine();
+            Console.WriteLine($"{playerOne} press enter to roll the dice.");
             Console.ReadLine();
+            RollTheDice(keptDice);
 
-            Console.WriteLine(RollTheDice(keptDice));
-            Console.WriteLine("Please select the dice you would like to keep." +
-                "If there is more than one die then seperate with each one number with a ,"
-                + " ie. 4,6,2");
-            Console.ReadLine();
+                
+                
+                //make into string as otherwise it only comes up with the type of array it is
+            Console.WriteLine();
+            Console.WriteLine("Please select the die you would like to keep. " +
+                "If there is more than one die then seperate each number with a \",\""
+                + " ie. if the dice came up 4, 6, 2, 1, 2. You can enter 2,2 for what you would like to keep ");
+            string userInput = Console.ReadLine();
 
-        }                             
+            //Look up how to convert string into an int (Because you forgot :(  )
+            // Look up how to use split and join. If statements will allow you to see if their numbers are correct or not. 
+            //get the kept number of dice by calculating the length of the array the user made.
+            //
 
-         public static int[] RollTheDice(int keptDice)
-         {
-                int numberOfDice = 5 - keptDice;
-                int[] randomRoll = new int[numberOfDice];
-                for (int i = 0; i < randomRoll.Length; i++)
-                {
-                    int die = new Random().Next(1, 7);
-                    randomRoll[i] = die;
-                }
-                return randomRoll[];                                                                     
-         }
+        }
+        public static int[] RollTheDice(int keptDice)
+        {
+            int numberOfDice = 5 - keptDice;
+            int[] randomRoll = new int[numberOfDice];
+            for (int i = 0; i < randomRoll.Length; i++)
+            {
+                int die = new Random().Next(1, 7);
+                randomRoll[i] = die;
+            }
+            return randomRoll;
+        }
+
     }
+
 }

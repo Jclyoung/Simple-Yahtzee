@@ -75,22 +75,14 @@ namespace Simple_Yahtzee
             {
                 Console.Write(roll);
                 Console.Write(", ");
-            }
-
-            //make into string as otherwise it only comes up with the type of array it is
+            }            
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Please select the die you would like to keep. " +
                 "If there is more than one die then seperate each number with a \",\""
                 + " ie. if the dice came up 4, 6, 2, 1, 2. You can enter 2,2 for what you would like to keep ");
-            string userInput = Console.ReadLine();
-
-            
-
-        
-             
-
-            //Look up how to convert string into an int (Because you forgot :(  )
+            string userInput = Console.ReadLine();       
+                
             // Look up how to use split and join. If statements will allow you to see if their numbers are correct or not. 
             //get the kept number of dice by calculating the length of the array the user made.
             //
@@ -109,7 +101,7 @@ namespace Simple_Yahtzee
             return randomRoll;
         }
 
-        public static int ChoosenDie()
+        public static int ChoosenDie(userInput)
         {
 
 

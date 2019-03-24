@@ -138,11 +138,9 @@ namespace Simple_Yahtzee
                 Console.WriteLine("If you would like to keep this die, type the letter \"y\" and then enter." +
                                   "\nOtherwise, press enter to continue");
 
-                string userSelection = Console.ReadLine();
-                if (userSelection != "Y" || userSelection != "y")
+                if (Console.ReadKey().Key != ConsoleKey.Y)
                 {
-                    rollDice[diceIndex] = string.Empty;
-                    diceIndex++;
+                    rollDice[diceIndex] = string.Empty;                    
                 }
             }
             return rollDice;

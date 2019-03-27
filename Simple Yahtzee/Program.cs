@@ -180,8 +180,9 @@ namespace Simple_Yahtzee
             {
                 diceId++;
                 Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine($"{diceId}) {roll}");
-                Console.WriteLine("If you would like to keep this die, type the letter \"y\" and then enter." +
+                Console.WriteLine("If you would like to keep this die, type the letter \"y\"." +
                                   "\nOtherwise, press enter to continue");
                 if (Console.ReadKey().Key != ConsoleKey.Y)
                 {

@@ -212,14 +212,14 @@ namespace Simple_Yahtzee
 
 
             if (i[0] == i[1] && i[1] == i[2] && i[2] == i[3] && i[3] == i[4])
-                tally = 100;
+                tally = 50;
             else if (i[0] == i[1] && i[1] == i[2] && i[3] == i[4] || i[0] == i[1] && i[1] == i[2] && i[2] == i[3] & i[3] == i[4])
                 tally = 25;
             else if (i[0] == i[1] && i[1] == i[2] && i[2] == i[3] || i[1] == i[2] && i[2] == i[3] & i[3] == i[4])
-                tally = 1 + 3;
+                tally = 4;
             else if (i[0] == i[1] && i[1] == i[2] || i[1] == i[2]
                 && i[2] == i[3] || i[2] == i[3] && i[3] == i[4])
-                tally = 1 + 2;
+                tally = 3;
             else if (i[0] == i[1] || i[1] == i[2] || i[2] == i[3]
                 || i[3] == i[4])
                 tally++;

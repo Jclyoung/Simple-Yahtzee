@@ -150,7 +150,7 @@ namespace Simple_Yahtzee
                 winner = "the Computer";
 
             Console.WriteLine($"Your Final Score is ....  { playersTalliedScore}");
-            Console.WriteLine($"The Computer's FInal Score is .... {compsTalliedScore}");
+            Console.WriteLine($"The Computer's Final Score is .... {compsTalliedScore}");
             Console.WriteLine($"The winner is {winner}!");
             Console.ReadLine();
         }

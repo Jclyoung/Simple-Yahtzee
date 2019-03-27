@@ -5,7 +5,9 @@
 namespace Simple_Yahtzee
 {
     class Program
-    {       
+    {
+        public static object PlayersScore { get; private set; }
+
         public static void Main(string[] args)
         { //myarray.concat.newarray.toarray
             GameLoop();
@@ -19,7 +21,7 @@ namespace Simple_Yahtzee
             Console.WriteLine("2) Instructions");
             Console.WriteLine("3) Quit");
             string userSelection = Console.ReadLine();
-            if (userSelection == "1" )
+            if (userSelection == "1")
             {
                 Yahtzee();
                 return true;
@@ -66,49 +68,93 @@ namespace Simple_Yahtzee
                             "\n3 of a kind  = 3 points total" +
                             "\n4 of a kind  = 4 points total" +
                             "\nFull House   = 25 Points total" +
-                            "\nYahtzee      = 50 points total"); 
+                            "\nYahtzee      = 50 points total");
 
-         Console.WriteLine("Choose an Option:" +
-                           "\n1) Play Yahtzee" +
-                           "\n2) Main Menu");
+            Console.WriteLine("Choose an Option:" +
+                              "\n1) Play Yahtzee" +
+                              "\n2) Main Menu");
             string userSelection = Console.ReadLine();
             if (userSelection == "1")
-               Yahtzee();
+                Yahtzee();
             else if (userSelection == "2")
-               MainMenu();
+                MainMenu();
             return;
         }
-       
+
         public static void Yahtzee()
         {
             Console.Clear();
-            int keptDice = 0;
-           
+
+
             Console.WriteLine("Welcome to a basic game of Yahtzee dice." +
-                "\n" +              
+                "\n" +
                 "\nPlayer One, please enter your name");
             string playerName = Console.ReadLine();
 
             Console.Clear();
             Console.WriteLine($"{playerName} press enter to roll the dice.");
             Console.ReadLine();
-            
-            string[] firstRoll = RollTheDice(keptDice);
-            UserSelectsDice(firstRoll);
-            keptDice = Reroll(firstRoll);
-            if (keptDice > 0)
-            {
-                string[] secondRoll = RollTheDice(keptDice);
-                UserSelectsDice(secondRoll);
-            }
-            if (keptDice > 0)
-            {
-                string[] thirdRoll = RollTheDice(keptDice);
-                UserSelectsDice(thirdRoll);               
-            }
-            TallyScore();
+
+            int keptDice = 0;
+            string[] firstRoll = UserSelectsDice(RollTheDice(keptDice));
+            keptDice = firstRoll.Length;
+
+            Console.WriteLine();
+            string[] secondRoll = RollTheDice(keptDice);
+            secondRoll = UserSelectsDice(secondRoll);
+            keptDice = firstRoll.Length + secondRoll.Length;
+
+            Console.WriteLine();
+            string[] thirdRoll = RollTheDice(keptDice);
+
+            string[] seperators = { ",", " " };
+            string firstStringRoll = string.Join(", ", firstRoll);
+            string secondStringRoll = string.Join(", ", secondRoll);
+            string thirdStringRoll = string.Join(", ", thirdRoll);
+            string finalStringRoll = firstStringRoll + " " + secondStringRoll + " " + thirdStringRoll;
+            string[] playersDice = finalStringRoll.Split(seperators, StringSplitOptions.RemoveEmptyEntries);
+            Array.Sort(playersDice);
+            Console.WriteLine();
+            Console.WriteLine($"Your final dice are: " + string.Join(", ", playersDice));
+            Console.ReadLine();
+
+            Console.WriteLine("Computer's turn, press Enter to continue");
+            Console.ReadLine();
+
+            string[] computersFirstRoll = RollTheDice(0);
+            Array.Sort(computersFirstRoll);
+            string[] computersSecondRoll = RollTheDice(0);
+            Array.Sort(computersSecondRoll);
+            string[] computersThirdRoll = RollTheDice(0);
+            Array.Sort(computersThirdRoll);
+            Console.WriteLine("The Computer's first roll: \n" +
+                             string.Join(", ", computersFirstRoll) +
+                             "\n" +
+                             "\n" +
+                             "\n The Computer's second roll: \n" +
+                             string.Join(", ", computersSecondRoll) +
+                             "\n" +
+                             "\n" +
+                             "\n The Computer's final roll: \n" +
+                             string.Join(", ", computersThirdRoll));
+            Console.ReadLine();
+            int playersTalliedScore = Tallies(playersDice);
+            int compsFirstTallied = Tallies(computersFirstRoll);
+            int compsSecondTallied = Tallies(computersSecondRoll);
+            int compsThirdTallied = Tallies(computersThirdRoll);
+            int compsTalliedScore = Math.Max(Math.Max(compsFirstTallied, compsSecondTallied), compsThirdTallied);
+            string winner = "";
+            if (playersTalliedScore >= compsTalliedScore)
+                winner = playerName;
+            else
+                winner = "the Computer";
+
+            Console.WriteLine($"Your Final Score is ....  { playersTalliedScore}");
+            Console.WriteLine($"The Computer's FInal Score is .... {compsTalliedScore}");
+            Console.WriteLine($"The winner is {winner}!");
+            Console.ReadLine();
         }
-        
+
         public static string[] RollTheDice(int keptDice)
         {
             int numberOfDice = 5 - keptDice;
@@ -118,12 +164,12 @@ namespace Simple_Yahtzee
                 int die = new Random().Next(1, 7);
                 randomRoll[i] = die.ToString();
             }
+            Array.Sort(randomRoll);
             return randomRoll;
         }
 
         public static string[] UserSelectsDice(string[] rollDice)
         {
-
             int diceId = 0;
             int diceIndex = 0;
             Console.WriteLine("You rolled: \n" +
@@ -137,29 +183,45 @@ namespace Simple_Yahtzee
                 Console.WriteLine($"{diceId}) {roll}");
                 Console.WriteLine("If you would like to keep this die, type the letter \"y\" and then enter." +
                                   "\nOtherwise, press enter to continue");
-
                 if (Console.ReadKey().Key != ConsoleKey.Y)
                 {
-                    rollDice[diceIndex] = string.Empty;                    
+                    rollDice[diceIndex] = string.Empty;
                 }
+                diceIndex++;
             }
-            return rollDice;
+            string[] separators = { " ", "," };
+            string rollDiceString = string.Join(", ", rollDice);
+            string[] heldDice = rollDiceString.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            return heldDice;
         }
 
-        private static int Reroll(string[] userSelectedDice)
+        private static int KeptDiceReturn(string[] userDiceSelection)
         {
-            throw new NotImplementedException();
+            int keptDice = 0;
+            foreach (string roll in userDiceSelection)
+                keptDice++;
+
+            return keptDice;
         }
 
-        private static void TallyScore()
+        private static int Tallies(string[] diceInput)
         {
-            throw new NotImplementedException();
+            int tally = 1;
+            string[] i = diceInput;
+
+
+            if (i[0] == i[1] && i[1] == i[2] && i[2] == i[3] && i[3] == i[4])
+                tally = 1 + 4;
+            else if (i[0] == i[1] && i[1] == i[2] && i[2] == i[3] || i[1] == i[2] && i[2] == i[3] & i[3] == i[4])
+                tally = 1 + 3;
+            else if (i[0] == i[1] && i[1] == i[2] || i[1] == i[2]
+                && i[2] == i[3] || i[2] == i[3] && i[3] == i[4])
+                tally = 1 + 2;
+            else if (i[0] == i[1] || i[1] == i[2] || i[2] == i[3]
+                || i[3] == i[4])
+                tally++;
+            return tally;
         }
-
-
-        
-
-
 
 
     }
@@ -167,5 +229,10 @@ namespace Simple_Yahtzee
 
 
 
-
 }
+
+
+
+
+
+

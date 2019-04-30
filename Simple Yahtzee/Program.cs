@@ -40,9 +40,7 @@ namespace Simple_Yahtzee
         {
             bool displayMenu = true;
             while (displayMenu)
-            {
-                displayMenu = MainMenu();
-            }
+                displayMenu = MainMenu();            
         }
 
         public static void Instructions()
@@ -85,7 +83,6 @@ namespace Simple_Yahtzee
         {
             Console.Clear();
 
-
             Console.WriteLine("Welcome to a basic game of Yahtzee dice." +
                 "\n" +
                 "\nPlayer One, please enter your name");
@@ -106,6 +103,8 @@ namespace Simple_Yahtzee
 
             Console.WriteLine();
             string[] thirdRoll = RollTheDice(keptDice);
+            Console.WriteLine($"Your final roll is {string.Join(", ",thirdRoll)}");
+            Console.ReadLine();
 
             string[] seperators = { ",", " " };
             string firstStringRoll = string.Join(", ", firstRoll);
@@ -213,7 +212,7 @@ namespace Simple_Yahtzee
 
             if (i[0] == i[1] && i[1] == i[2] && i[2] == i[3] && i[3] == i[4])
                 tally = 50;
-            else if (i[0] == i[1] && i[1] == i[2] && i[3] == i[4] || i[0] == i[1] && i[1] == i[2] && i[2] == i[3] & i[3] == i[4])
+            else if (i[0] == i[1] && i[1] == i[2] && i[3] == i[4] || i[0] == i[1] && i[2] == i[3] && i[3] == i[4])
                 tally = 25;
             else if (i[0] == i[1] && i[1] == i[2] && i[2] == i[3] || i[1] == i[2] && i[2] == i[3] & i[3] == i[4])
                 tally = 4;
